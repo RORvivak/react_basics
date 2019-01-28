@@ -21,7 +21,18 @@ class App extends Component {
         ]
       }   
     )
-  } 
+  }
+  
+  nameHandler = (event) =>{
+    this.setState({
+      person: [
+        {name: "vivak kumar", age: "27"},
+        {name: event.target.value, age: "26"},
+        {name: "Ramu", age: "40"}
+      ]
+    } )
+
+  }
 
   render() {
     return (
@@ -30,7 +41,7 @@ class App extends Component {
         <h1>I am a react project</h1>
         <p>This is working really!!!</p>
         <Person name = {this.state.person[0].name} age  = {this.state.person[0].age}/>
-        <Person name = {this.state.person[1].name} age  = {this.state.person[1].age}>I am great</Person>
+        <Person name = {this.state.person[1].name} age  = {this.state.person[1].age} change={this.nameHandler}>I am great</Person>
         <Person name = {this.state.person[2].name} age  = {this.state.person[2].age}/>
       </div>
     );
