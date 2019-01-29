@@ -8,19 +8,16 @@ class App extends Component {
       {name: "vivak", age: "27"},
       {name: "sam", age: "26"},
       {name: "Ramu", age: "30"}
-    ]
+    ],
+    showData: false
   }
 
-  switchData= () =>{
-    this.setState(
-      {
-        person: [
-          {name: "vivak kumar", age: "27"},
-          {name: "sam", age: "26"},
-          {name: "Ramu", age: "40"}
-        ]
-      }   
-    )
+  display = () =>{
+    console.log(this.showData);
+    this.setState({
+      showData: !this.state.showData
+    })
+    console.log(this.showData);
   }
   
   nameHandler = (event) =>{
@@ -35,14 +32,24 @@ class App extends Component {
   }
 
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1x solid blue',
+      padding: '8px'
+    };
+    
     return (
       <div className="App">
-        <button onClick = {this.switchData}>Toggle</button>
         <h1>I am a react project</h1>
         <p>This is working really!!!</p>
-        <Person name = {this.state.person[0].name} age  = {this.state.person[0].age}/>
-        <Person name = {this.state.person[1].name} age  = {this.state.person[1].age} change={this.nameHandler}>I am great</Person>
-        <Person name = {this.state.person[2].name} age  = {this.state.person[2].age}/>
+        <button onClick = {this.display} style={style}>Show</button>
+        {this.state.showData ? 
+        <div>
+          <Person name = {this.state.person[0].name} age  = {this.state.person[0].age}/>
+          <Person name = {this.state.person[1].name} age  = {this.state.person[1].age} change={this.nameHandler}>I am great</Person>
+          <Person name = {this.state.person[2].name} age  = {this.state.person[2].age}/>
+        </div>  : null }
       </div>
     );
     // return React.createElement('div',{className: "App"} ,React.createElement('h1',null ,'Hi i am vivak'));
