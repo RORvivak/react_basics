@@ -13,11 +13,9 @@ class App extends Component {
   }
 
   display = () =>{
-    console.log(this.showData);
     this.setState({
       showData: !this.state.showData
     })
-    console.log(this.showData);
   }
   
   nameHandler = (event) =>{
@@ -37,19 +35,21 @@ class App extends Component {
       font: 'inherit',
       border: '1x solid blue',
       padding: '8px'
-    };
-    
+    }
+    let person = null
+    if(this.state.showData){
+      person = ( <div>
+        { this.state.person.map(e=> {
+          return (<Person name = {e.name} age  = {e.age}/>)
+        }) }
+        </div>)
+    }
     return (
       <div className="App">
         <h1>I am a react project</h1>
         <p>This is working really!!!</p>
         <button onClick = {this.display} style={style}>Show</button>
-        {this.state.showData ? 
-        <div>
-          <Person name = {this.state.person[0].name} age  = {this.state.person[0].age}/>
-          <Person name = {this.state.person[1].name} age  = {this.state.person[1].age} change={this.nameHandler}>I am great</Person>
-          <Person name = {this.state.person[2].name} age  = {this.state.person[2].age}/>
-        </div>  : null }
+        {person}
       </div>
     );
     // return React.createElement('div',{className: "App"} ,React.createElement('h1',null ,'Hi i am vivak'));
