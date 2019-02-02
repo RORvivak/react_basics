@@ -21,7 +21,7 @@ class App extends Component {
   test = (event, i) => { 
     console.log(i)
    const person = [...this.state.person]
-   person[i] =  {name: event.target.value, age: 26}
+   person[i] =  {name: event.target.value, age: person[i].age}
    console.log(i)
    this.setState(
     {person: person}
