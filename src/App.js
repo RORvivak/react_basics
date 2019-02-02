@@ -5,9 +5,9 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     person: [
-      {name: "vivak", age: "27"},
-      {name: "sam", age: "26"},
-      {name: "Ramu", age: "30"}
+      {id: 1, name: "vivak", age: "27"},
+      {id: 2, name: "sam", age: "26"},
+      {id: 3, name: "Ramu", age: "30"}
     ],
     showData: false
   }
@@ -30,9 +30,9 @@ class App extends Component {
   nameHandler = (event) =>{
     this.setState({
       person: [
-        {name: "vivak kumar", age: "27"},
-        {name: event.target.value, age: "26"},
-        {name: "Ramu", age: "40"}
+        {id: 1, name: "vivak kumar", age: "27"},
+        {id: 2, name: event.target.value, age: "26"},
+        {id: 3, name: "Ramu", age: "40"}
       ]
     } )
 
@@ -40,7 +40,7 @@ class App extends Component {
 
   deletePerson = (personIndex) => {
     const person = [...this.state.person]
-    person.splice(2,1)
+    person.splice(personIndex,1)
     // alert(personIndex)
     this.setState({person: person})
   }
@@ -56,7 +56,7 @@ class App extends Component {
     if(this.state.showData){
       person = ( <div>
         { this.state.person.map((e, index)=> {
-          return (<Person name = {e.name} age  = {e.age}  change = {(event) => {this.test(event, index)}}/>)
+          return (<Person remove = { () => this.deletePerson(index)} name = {e.name} age  = {e.age}  change = {(event) => {this.test(event, index)}}/>)
         }) }
         </div>)
     }
