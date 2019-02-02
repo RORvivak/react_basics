@@ -18,6 +18,15 @@ class App extends Component {
     })
   }
   
+  test = (event, i) => { 
+    console.log(i)
+   const person = [...this.state.person]
+   person[i] =  {name: event.target.value, age: 26}
+   console.log(i)
+   this.setState(
+    {person: person}
+   )
+  }
   nameHandler = (event) =>{
     this.setState({
       person: [
@@ -31,7 +40,8 @@ class App extends Component {
 
   deletePerson = (personIndex) => {
     const person = [...this.state.person]
-    person.splice(personIndex, 1)
+    person.splice(2,1)
+    // alert(personIndex)
     this.setState({person: person})
   }
 
@@ -45,8 +55,8 @@ class App extends Component {
     let person = null
     if(this.state.showData){
       person = ( <div>
-        { this.state.person.map((e,i)=> {
-          return (<Person name = {e.name} age  = {e.age} remove = {(i) => this.deletePerson(i)} chsnge = {this.deletePerson.nameHandler}/>)
+        { this.state.person.map((e, index)=> {
+          return (<Person name = {e.name} age  = {e.age}  change = {(event) => {this.test(event, index)}}/>)
         }) }
         </div>)
     }
