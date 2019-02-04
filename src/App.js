@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Validation from './Validation/Validation'
 
 class App extends Component {
   state = {
     person: [
-      {id: 1, name: "vivak", age: "27"},
-      {id: 2, name: "sam", age: "26"},
-      {id: 3, name: "Ramu", age: "30"}
+      {id: 1, name: "vivak", age: "27", length: 0},
+      {id: 2, name: "sam", age: "26", length: 0},
+      {id: 3, name: "Ramu", age: "30", length: 0}
     ],
     showData: false
   }
@@ -16,6 +17,28 @@ class App extends Component {
     this.setState({
       showData: !this.state.showData
     })
+  }
+
+  passwordCheck = (event, i) =>{
+    const person = [...this.state.person]
+    person[i].length = event.target.value.length
+    this.setState({person: person})
+    console.log(this.state.person)
+  }
+
+  passwordValidation = (index) =>{
+    const passwordLength = this.state.person[index].length
+    if (passwordLength === 0)
+    {
+      
+    }
+    else if (passwordLength > 5)
+    {
+      return("Strong")
+    }
+    else{
+      return("Not Strong")
+    }
   }
   
   test = (event, i) => { 
@@ -56,7 +79,8 @@ class App extends Component {
     if(this.state.showData){
       person = ( <div>
         { this.state.person.map((e, index)=> {
-          return (<Person remove = { () => this.deletePerson(index)} name = {e.name} age  = {e.age}  change = {(event) => {this.test(event, index)}}/>)
+          return (<div><Person remove = { () => this.deletePerson(index)} name = {e.name} age  = {e.age}  change = {(event) => {this.test(event, index)}} length = {(event)=> this.passwordCheck(event,index)}/>
+          <Validation text = {this.passwordValidation(index)}/></div>)
         }) }
         </div>)
     }
@@ -66,6 +90,7 @@ class App extends Component {
         <p>This is working really!!!</p>
         <button onClick = {this.display} style={style}>Show</button>
         {person}
+        <Validation/>
       </div>
     );
     // return React.createElement('div',{className: "App"} ,React.createElement('h1',null ,'Hi i am vivak'));
