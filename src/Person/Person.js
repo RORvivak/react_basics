@@ -9,7 +9,7 @@ const Person = (props) => {
         <p>{props.children}</p>
         <input type="text"  onChange = {props.change}/>
         <p>Password Check</p> 
-        <input type="text" onChange = {props.length}/>
+        <input type="text" onChange = {props.length} value = {props.value}/>
     </div>);   
 
 }

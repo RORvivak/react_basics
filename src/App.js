@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation'
+import Char from "./Char/Char"
 
 class App extends Component {
   state = {
     person: [
-      {id: 1, name: "vivak", age: "27", length: 0},
-      {id: 2, name: "sam", age: "26", length: 0},
-      {id: 3, name: "Ramu", age: "30", length: 0}
+      {id: 1, name: "vivak", age: "27", length: 0, text: ""},
+      {id: 2, name: "sam", age: "26", length: 0, text: ""},
+      {id: 3, name: "Ramu", age: "30", length: 0, text: ""}
     ],
     showData: false
   }
@@ -21,6 +22,7 @@ class App extends Component {
 
   passwordCheck = (event, i) =>{
     const person = [...this.state.person]
+    person[i].text = event.target.value 
     person[i].length = event.target.value.length
     this.setState({person: person})
     console.log(this.state.person)
@@ -41,6 +43,14 @@ class App extends Component {
     }
   }
   
+  delete = (i, index) => {
+    const person = [...this.state.person]
+    const formattedArrayText = person[i].text.split("")
+    formattedArrayText.splice(index, 1)
+    person[i].text = formattedArrayText.join("")
+    this.setState({person: person})
+    
+  }
   test = (event, i) => { 
     console.log(i)
    const person = [...this.state.person]
@@ -76,12 +86,24 @@ class App extends Component {
       padding: '8px'
     }
     let person = null
+    let char = null
     if(this.state.showData){
       person = ( <div>
         { this.state.person.map((e, index)=> {
-          return (<div><Person remove = { () => this.deletePerson(index)} name = {e.name} age  = {e.age}  change = {(event) => {this.test(event, index)}} length = {(event)=> this.passwordCheck(event,index)}/>
-          <Validation text = {this.passwordValidation(index)}/></div>)
+          return (<div><Person remove = { () => this.deletePerson(index)} name = {e.name} age  = {e.age} value = {this.state.person[index].text}  change = {(event) => {this.test(event, index)}} length = {(event)=> this.passwordCheck(event,index)}/>
+          <Validation text = {this.passwordValidation(index)} /></div>)
         }) }
+        </div>)
+
+        char = (<div>
+          {this.state.person.map((e,i) => {
+            
+             return( e.text.split("").map((e,index) => {
+                return(<div><Char name = {e} remove = {() => this.delete(i, index)} ></Char></div>)
+
+              }))
+           
+          })}
         </div>)
     }
     return (
@@ -90,6 +112,7 @@ class App extends Component {
         <p>This is working really!!!</p>
         <button onClick = {this.display} style={style}>Show</button>
         {person}
+        {char}
         <Validation/>
       </div>
     );
