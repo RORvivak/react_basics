@@ -3,6 +3,7 @@ import './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation'
 import Char from "./Char/Char"
+import Radium from "radium";
 
 class App extends Component {
   state = {
@@ -80,13 +81,25 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'Red',
       font: 'inherit',
-      border: '1x solid blue',
-      padding: '8px'
+      border: '100x solid blue',
+      padding: '40px, 20px',
+      ':hover': {  
+        color: 'blue'
+      }
     }
     let person = null
     let char = null
+    const text = []
+    if(this.state.person.length <=2)
+    {
+      text.push("red")
+    }
+    if(this.state.person.length <=1)
+    {
+      text.push("bold")
+    }
     if(this.state.showData){
       person = ( <div>
         { this.state.person.map((e, index)=> {
@@ -102,14 +115,13 @@ class App extends Component {
                 return(<div><Char name = {e} remove = {() => this.delete(i, index)} ></Char></div>)
 
               }))
-           
           })}
         </div>)
-    }
+      style.backgroundColor = "green"}
     return (
       <div className="App">
         <h1>I am a react project</h1>
-        <p>This is working really!!!</p>
+        <p className={text.join(" ")}>This is working really!!!</p>
         <button onClick = {this.display} style={style}>Show</button>
         {person}
         {char}
@@ -120,4 +132,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
