@@ -3,7 +3,9 @@ import './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation'
 import Char from "./Char/Char"
-import Radium from "radium";
+import Radium, {StyleRoot} from "radium";
+
+
 
 class App extends Component {
   state = {
@@ -119,14 +121,16 @@ class App extends Component {
         </div>)
       style.backgroundColor = "green"}
     return (
-      <div className="App">
-        <h1>I am a react project</h1>
-        <p className={text.join(" ")}>This is working really!!!</p>
-        <button onClick = {this.display} style={style}>Show</button>
-        {person}
-        {char}
-        <Validation/>
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>I am a react project</h1>
+          <p className={text.join(" ")}>This is working really!!!</p>
+          <button onClick = {this.display} style={style}>Show</button>
+          {person}
+          {char}
+          <Validation/>
+        </div>
+      </StyleRoot>  
     );
     // return React.createElement('div',{className: "App"} ,React.createElement('h1',null ,'Hi i am vivak'));
   }
