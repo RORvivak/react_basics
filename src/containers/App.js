@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
-import Validation from './Validation/Validation'
-import Char from "./Char/Char"
+import Persons from '../components/Persons/Persons';
+import Validation from '../components/Validation/Validation'
+import Char from "../components/Char/Char"
 import Radium, {StyleRoot} from "radium";
 
 
@@ -104,19 +104,19 @@ class App extends Component {
     }
     if(this.state.showData){
       person = ( <div>
-        { this.state.person.map((e, index)=> {
-          return (<div><Person remove = { () => this.deletePerson(index)} name = {e.name} age  = {e.age} value = {this.state.person[index].text}  change = {(event) => {this.test(event, index)}} length = {(event)=> this.passwordCheck(event,index)}/>
-          <Validation text = {this.passwordValidation(index)} /></div>)
-        }) }
+        {<Persons persons = {this.state.person}
+        deletePerson = {this.deletePerson}
+        test = {this.test}
+        passwordCheck = {this.passwordCheck}/> }
         </div>)
 
         char = (<div>
           {this.state.person.map((e,i) => {
-            
+             if(e.text !=  undefined){
              return( e.text.split("").map((e,index) => {
                 return(<div><Char name = {e} remove = {() => this.delete(i, index)} ></Char></div>)
 
-              }))
+              }))}
           })}
         </div>)
       style.backgroundColor = "green"}
