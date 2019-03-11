@@ -4,17 +4,41 @@ import Persons from '../components/Persons/Persons';
 import Validation from '../components/Validation/Validation'
 import Char from "../components/Char/Char"
 import Radium, {StyleRoot} from "radium";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 
 
 class App extends Component {
-  state = {
-    person: [
-      {id: 1, name: "vivak", age: "27", length: 0, text: ""},
-      {id: 2, name: "sam", age: "26", length: 0, text: ""},
-      {id: 3, name: "Ramu", age: "30", length: 0, text: ""}
-    ],
-    showData: false
+
+  constructor(props){
+    super(props)
+    this.state = {
+      person: [
+        {id: 1, name: "vivak", age: "27", length: 0, text: ""},
+        {id: 2, name: "sam", age: "26", length: 0, text: ""},
+        {id: 3, name: "Ramu", age: "30", length: 0, text: ""}
+      ],
+      showData: false
+    }
+    console.log("[App.js], constructor,")
+  }
+
+  static getDerivedStateFromProps(props, state){
+    console.log("[App.js] getDerivedStateFromProps", props)
+    return state
+  }
+
+  componentDidMount() {
+    console.log("[App.js] componentDidMount")
+  }
+
+  shouldComponentUpdate(nextprop, nextstate){
+    console.log("[App.js] shouldComponentUpdate")
+    return true
+  }
+
+  componentWillMount() {
+    console.log("[App.js] componentWillMount")
   }
 
   display = () =>{
@@ -82,6 +106,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("[app.js] render")
     const style = {
       backgroundColor: 'Red',
       font: 'inherit',
@@ -93,15 +118,7 @@ class App extends Component {
     }
     let person = null
     let char = null
-    const text = []
-    if(this.state.person.length <=2)
-    {
-      text.push("red")
-    }
-    if(this.state.person.length <=1)
-    {
-      text.push("bold")
-    }
+   
     if(this.state.showData){
       person = ( <div>
         {<Persons persons = {this.state.person}
@@ -123,9 +140,7 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className="App">
-          <h1>I am a react project</h1>
-          <p className={text.join(" ")}>This is working really!!!</p>
-          <button onClick = {this.display} style={style}>Show</button>
+         <Cockpit style = {this.style} display = {this.display} person = {this.state.person}/>
           {person}
           {char}
           <Validation/>
