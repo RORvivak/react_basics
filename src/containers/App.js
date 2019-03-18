@@ -5,6 +5,9 @@ import Validation from '../components/Validation/Validation'
 import Char from "../components/Char/Char"
 import Radium, {StyleRoot} from "radium";
 import Cockpit from "../components/Cockpit/Cockpit";
+import withClass from "../components/hoc/withClass"
+import Aux from "../components/hoc/Auxiliary"
+import classes from "./App.css"
 
 
 
@@ -18,7 +21,8 @@ class App extends Component {
         {id: 2, name: "sam", age: "26", length: 0, text: ""},
         {id: 3, name: "Ramu", age: "30", length: 0, text: ""}
       ],
-      showData: false
+      showData: false,
+      counter:0
     }
     console.log("[App.js], constructor,")
   }
@@ -88,13 +92,17 @@ class App extends Component {
    )
   }
   nameHandler = (event) =>{
-    this.setState({
-      person: [
-        {id: 1, name: "vivak kumar", age: "27"},
-        {id: 2, name: event.target.value, age: "26"},
-        {id: 3, name: "Ramu", age: "40"}
-      ]
-    } )
+    this.setState((PrevState, state)=>{
+      return( {
+        person: [
+          {id: 1, name: "vivak kumar", age: "27"},
+          {id: 2, name: event.target.value, age: "26"},
+          {id: 3, name: "Ramu", age: "40"}
+        ],
+        counter: PrevState.counter + 1
+      } )
+
+    })
 
   }
 
@@ -138,17 +146,17 @@ class App extends Component {
         </div>)
       style.backgroundColor = "green"}
     return (
+      <Aux>
       <StyleRoot>
-        <div className="App">
          <Cockpit style = {this.style} display = {this.display} person = {this.state.person}/>
           {person}
           {char}
           <Validation/>
-        </div>
-      </StyleRoot>  
+      </StyleRoot>
+      </Aux>  
     );
     // return React.createElement('div',{className: "App"} ,React.createElement('h1',null ,'Hi i am vivak'));
   }
 }
 
-export default Radium(App);
+export default withClass(App, classes.App);
