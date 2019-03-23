@@ -1,15 +1,16 @@
 
 import React, {Component} from 'react';
 import './Person.css';
-import Radium from 'radium';
+// import Radium from 'radium';
 import AuthContext from "../../../context/auth-context"
 
 class Person extends Component {
-
   constructor(props){
     super(props)
     this.ref = React.createRef();
   }
+
+  static contextType = AuthContext;
   componentDidMount(){
     this.ref.current.focus();
   }
@@ -22,7 +23,7 @@ class Person extends Component {
     
     return(<div className = 'Person' style={style} >
         <p onClick = {this.props.remove} >I am {this.props.name} and my age is {this.props.age}</p>
-        <AuthContext.Consumer>{(context) => <p>{context.auth ? "Authenticated" : "Not a valid user"}</p>}</AuthContext.Consumer>
+        {<p>{this.context.auth ? "Authenticated" : "Not a valid user"}</p>}
         <p>{this.props.children}</p>
         <input type="text"  onChange = {this.props.change} ref={this.ref}/>
         <p>Password Check</p> 
@@ -31,4 +32,4 @@ class Person extends Component {
   }
 }
 
-export default Radium(Person);
+export default Person;

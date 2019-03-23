@@ -30,7 +30,7 @@ const Cockpit = (props) =>  {
          <h1>I am a react project</h1>
             <p className={text.join(" ")}>This is working really!!!</p>
             <button onClick = {props.display} style={props.style}>Show</button>
-    <AuthContext.Consumer>{(context) => <button onClick={context.login}>Log In</button>}</AuthContext.Consumer>
+            <AuthContext.Consumer>{(context) => <button onClick={context.login}>Log In</button>}</AuthContext.Consumer>
          </div>   
     )
 
