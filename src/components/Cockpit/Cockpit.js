@@ -1,8 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import classes from "./Cockpit.css"
 import  withClass from '../hoc/withClass'
 
 const Cockpit = (props) =>  {
+// const toggleButtonRef = useRef(null);
+
+// useEffect(()=>{
+//   toggleButtonRef.current.click();
+// })
   
     const text = []
     if(props.person.length <=2)
@@ -24,6 +29,7 @@ const Cockpit = (props) =>  {
          <h1>I am a react project</h1>
             <p className={text.join(" ")}>This is working really!!!</p>
             <button onClick = {props.display} style={props.style}>Show</button>
+            <button onClick={props.login}>Log In</button>
          </div>   
     )
 

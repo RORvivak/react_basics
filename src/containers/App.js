@@ -22,7 +22,8 @@ class App extends Component {
         {id: 3, name: "Ramu", age: "30", length: 0, text: ""}
       ],
       showData: false,
-      counter:0
+      counter:0,
+      authenticated: false
     }
     console.log("[App.js], constructor,")
   }
@@ -49,6 +50,10 @@ class App extends Component {
     this.setState({
       showData: !this.state.showData
     })
+  }
+
+  loginHandler = () => {
+    this.setState({authenticated: !this.state.authenticated})
   }
 
   passwordCheck = (event, i) =>{
@@ -132,7 +137,8 @@ class App extends Component {
         {<Persons persons = {this.state.person}
         deletePerson = {this.deletePerson}
         test = {this.test}
-        passwordCheck = {this.passwordCheck}/> }
+        passwordCheck = {this.passwordCheck}
+        auth = {this.state.authenticated}/> }
         </div>)
 
         char = (<div>
@@ -148,7 +154,7 @@ class App extends Component {
     return (
       <Aux>
       <StyleRoot>
-         <Cockpit style = {this.style} display = {this.display} person = {this.state.person}/>
+         <Cockpit style = {this.style} display = {this.display} person = {this.state.person} login={this.loginHandler}/>
           {person}
           {char}
           <Validation/>
