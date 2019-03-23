@@ -8,6 +8,7 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import withClass from "../components/hoc/withClass"
 import Aux from "../components/hoc/Auxiliary"
 import classes from "./App.css"
+import AuthContext from "../context/auth-context"
 
 
 
@@ -153,12 +154,14 @@ class App extends Component {
       style.backgroundColor = "green"}
     return (
       <Aux>
+      <AuthContext.Provider value = {{auth: this.state.authenticated, login: this.loginHandler}}> 
       <StyleRoot>
          <Cockpit style = {this.style} display = {this.display} person = {this.state.person} login={this.loginHandler}/>
           {person}
           {char}
           <Validation/>
       </StyleRoot>
+      </AuthContext.Provider>
       </Aux>  
     );
     // return React.createElement('div',{className: "App"} ,React.createElement('h1',null ,'Hi i am vivak'));

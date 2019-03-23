@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import './Person.css';
 import Radium from 'radium';
+import AuthContext from "../../../context/auth-context"
 
 class Person extends Component {
 
@@ -21,7 +22,7 @@ class Person extends Component {
     
     return(<div className = 'Person' style={style} >
         <p onClick = {this.props.remove} >I am {this.props.name} and my age is {this.props.age}</p>
-        <p>{this.props.auth ? "Authenticated" : "Not a valid user"}</p>
+        <AuthContext.Consumer>{(context) => <p>{context.auth ? "Authenticated" : "Not a valid user"}</p>}</AuthContext.Consumer>
         <p>{this.props.children}</p>
         <input type="text"  onChange = {this.props.change} ref={this.ref}/>
         <p>Password Check</p> 

@@ -28,7 +28,7 @@ class Persons extends PureComponent
   render(){
     console.log("persons.js rendering")
     return(this.props.persons.map((e, index)=> {
-        return (<div><Person auth = {this.props.auth} remove = { () => this.props.deletePerson(index)} name = {e.name} age  = {e.age} value = {e.text}  change = {(event) => {this.props.test(event, index)}} length = {(event)=> this.props.passwordCheck(event,index)}/>
+        return (<div><Person remove = { () => this.props.deletePerson(index)} name = {e.name} age  = {e.age} value = {e.text}  change = {(event) => {this.props.test(event, index)}} length = {(event)=> this.props.passwordCheck(event,index)}/>
         </div>)
       }));
     }   
